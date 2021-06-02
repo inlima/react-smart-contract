@@ -150,42 +150,35 @@ function Home() {
       <form onSubmit={handleCreateEvent}>
         <div className="content">
           <h2>Cadastro de Eventos</h2>
-          <input
-            placeholder="Digite o nome do evento"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <br />
-          <br />
-          <input
-            placeholder="Digite a descrição do evento"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <br />
-          <br />
-          <input
-            placeholder="Digite a data do evento"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
-          <br />
-          <br />
-          <input
-            placeholder="Digite o preço do ingresso"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          />
-          <br />
-          <br />
-          <input
-            placeholder="Digite a quantidade de ingressos"
-            value={ticketCount}
-            onChange={(e) => setTicketCount(e.target.value)}
-          />
-          <br />
-          <br />
+          <div className="formulario">
+            <input
+              placeholder="Digite o nome do evento"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <input
+              placeholder="Digite a descrição do evento"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <input
+              placeholder="Digite a data do evento"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+            />
+            <input
+              placeholder="Digite o preço do ingresso"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+            <input className="descricao"
+              placeholder="Digite a quantidade de ingressos"
+              value={ticketCount}
+              onChange={(e) => setTicketCount(e.target.value)}
+            />
           <button type="submit">Cadastrar</button>
+          </div>
+          
           {loadingCreateEvent ? (
             <h5>Processando cadastro de evento...</h5>
           ) : (
@@ -202,21 +195,19 @@ function Home() {
         <div className="content">
           <h2>Comprar Ingresso</h2>
           <br/>
-          <input
-            placeholder="Digite o id do evento"
-            value={eventPosition}
-            onChange={(e) => setEventPosition(e.target.value)}
-          />
-          <br />
-          <br /><input
-            placeholder="Digite a quantidade de ingressos"
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-          />
-          <br />
-          <br />
-
-          <button type="submit">Comprar</button>
+          <div className="formulario">
+            <input
+              placeholder="Digite o id do evento"
+              value={eventPosition}
+              onChange={(e) => setEventPosition(e.target.value)}
+            />
+            <input
+              placeholder="Digite a quantidade de ingressos"
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+            />
+            <button type="submit">Comprar</button>
+          </div>
           {loadingBuyEvent ? (
             <h5>Processando compra de ingresso...</h5>
           ) : (
@@ -230,16 +221,16 @@ function Home() {
       <div className="divider" />
       <form onSubmit={handleSearchEvent}>
         <div className="content">
-          <h2>Mostrar informação de um evento</h2>
+          <h2>Mostrar informações de um evento</h2>
 
-          <input
-            placeholder="Digite o id do evento"
-            value={eventPositionSearch}
-            onChange={(e) => setEventPositionSearch(e.target.value)}
-          />
-          <br />
-          <br />
-          <button type="submit">Buscar</button>
+          <div className="formulario">
+            <input
+              placeholder="Digite o id do evento"
+              value={eventPositionSearch}
+              onChange={(e) => setEventPositionSearch(e.target.value)}
+            />
+            <button type="submit">Buscar</button>
+          </div>
           {eventInfo ? (
             <div>
               <p>
