@@ -40,6 +40,7 @@ function Home() {
   const [price, setPrice] = useState("");
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
+  const [quantity, setQuantity] = useState("");
   const [eventPosition, setEventPosition] = useState("");
 
   const listEvent = async () => {
@@ -57,7 +58,7 @@ function Home() {
       setLoadingCreateEvent(true);
       const contas = await web3.eth.getAccounts();
       const response = await event.methods
-        .createParty(name, date, parseInt(price))
+        .createEvent(name, date, parseInt(price))
         .send({ from: contas[0] });
       console.log(response);
       setLoadingCreateEvent(false);
@@ -73,10 +74,10 @@ function Home() {
       setLoadingBuyEvent(true);
       const contas = await web3.eth.getAccounts();
       const response = await event.methods
-        .buyEntrance(parseInt(eventPosition) - 1)
+        .buyTicket(parseInt(eventPosition) - 1, parseInt(quantity))
         .send({
           from: contas[0],
-          value: parseInt(events[parseInt(eventPosition) - 1].price),
+          value: parseInt(events[parseInt(eventPosition) - 1].price * quantity),
         });
 
       console.log(response);
@@ -169,6 +170,12 @@ function Home() {
             placeholder="Digite o id do evento"
             value={eventPosition}
             onChange={(e) => setEventPosition(e.target.value)}
+          />
+          <br />
+          <br /><input
+            placeholder="Digite a quantidade de ingressos"
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
           />
           <br />
           <br />
