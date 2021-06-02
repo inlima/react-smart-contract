@@ -39,9 +39,12 @@ function Home() {
   const [loadingBuyEvent, setLoadingBuyEvent] = useState(false);
   const [price, setPrice] = useState("");
   const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
   const [quantity, setQuantity] = useState("");
   const [eventPosition, setEventPosition] = useState("");
+  const [eventInfo, setEventInfo] = useState(null);
+  const [eventPositionSearch, setEventPositionSearch] = useState("");
 
   const listEvent = async () => {
     try {
@@ -52,13 +55,27 @@ function Home() {
     }
   };
 
+  const handleSearchEvent = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await event.methods
+        .events(parseInt(eventPositionSearch) - 1)
+        .call();
+
+      setEventInfo(response);
+    } catch (error) {
+      setEventInfo(null);
+      console.log(error);
+    }
+  };
+
   const handleCreateEvent = async (e) => {
     e.preventDefault();
     try {
       setLoadingCreateEvent(true);
       const contas = await web3.eth.getAccounts();
       const response = await event.methods
-        .createEvent(name, date, parseInt(price))
+        .createEvent(name, description, date, parseInt(price))
         .send({ from: contas[0] });
       console.log(response);
       setLoadingCreateEvent(false);
@@ -101,6 +118,7 @@ function Home() {
           <tr>
             <th>id</th>
             <th>Nome do Evento</th>
+            <th>Descrição do Evento</th>
             <th>Data</th>
             <th>Valor do Ingresso (WEI)</th>
           </tr>
@@ -111,6 +129,7 @@ function Home() {
             <tr key={idx}>
               <td>{idx + 1}</td>
               <td>{event.name}</td>
+              <td>{event.description}</td>
               <td>{converteHorario(parseInt(event.date))}</td>
               <td>{event.price}</td>
             </tr>
@@ -132,6 +151,13 @@ function Home() {
             placeholder="Digite o nome do evento"
             value={name}
             onChange={(e) => setName(e.target.value)}
+          />
+          <br />
+          <br />
+          <input
+            placeholder="Digite a descrição do evento"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
           <br />
           <br />
@@ -191,6 +217,37 @@ function Home() {
           )}
         </div>
       </form>
+      <div className="divider" />
+      <form onSubmit={handleSearchEvent}>
+        <div className="content">
+          <h2>Mostrar informação de um evento</h2>
+
+          <input
+            placeholder="Digite o id do evento"
+            value={eventPositionSearch}
+            onChange={(e) => setEventPositionSearch(e.target.value)}
+          />
+          <br />
+          <br />
+          <button type="submit">Buscar</button>
+          {eventInfo ? (
+            <div>
+              <p>
+                <b>Nome do Evento:</b> {eventInfo.name}
+              </p>
+              <p>
+                <b>Descrição:</b> {eventInfo.description}
+              </p>
+              <p>
+                <b>Data:</b> {converteHorario(parseInt(eventInfo.date))}
+              </p>
+              <p>
+                <b>Preço do Ingresso:</b> {eventInfo.price} wei
+              </p>
+            </div>
+          ) : null}
+        </div>
+        </form>
       <br />
       <br />
     </div>
