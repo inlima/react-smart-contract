@@ -111,7 +111,7 @@ function Home() {
   }, []);
   return (
     <div>
-      <h1>Contrato de Eventos</h1>
+      <h1>Contrato Inteligente para Organização de Eventos</h1>
       <div className="divider" />
       <h2>Listagem de Eventos</h2>
       <table>
@@ -141,7 +141,7 @@ function Home() {
       </table>
 
       {!(events.length > 0) ? (
-        <h4>Nenhuma leitura cadastrada no servidor</h4>
+        <h3>No momento não há eventos cadastrados</h3 >
       ) : null}
 
       <br />
@@ -149,7 +149,7 @@ function Home() {
       <div className="divider" />
       <form onSubmit={handleCreateEvent}>
         <div className="content">
-          <h2>Cadastro de Eventos</h2>
+          <h2>Cadastro de Evento</h2>
           <div className="formulario">
             <input
               placeholder="Digite o nome do evento"
@@ -193,7 +193,7 @@ function Home() {
       <div className="divider" />
       <form onSubmit={handleBuyEvent}>
         <div className="content">
-          <h2>Comprar Ingresso</h2>
+          <h2>Comprar Ingressos</h2>
           <br/>
           <div className="formulario">
             <input
@@ -244,6 +244,9 @@ function Home() {
               </p>
               <p>
                 <b>Preço do Ingresso:</b> {eventInfo.price} wei
+              </p>
+              <p>
+                <b>Ingressos Disponíveis:</b> {eventInfo.ticketCount} 
               </p>
             </div>
           ) : null}
