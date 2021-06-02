@@ -1,7 +1,7 @@
 // importa o web3
 import web3 from "./web3";
 // Endereço do contrato gerado no deploy
-const address = "0xfe72994d014ce98Cd34733C233c6b29c2EB9a6a5";
+const address = "0x1dFDB861C55Aabd41A73bfec4A2E9f02C428014C";
 // Abi gerada no deploy do contrato
 const abi = [
     {
@@ -43,6 +43,11 @@ const abi = [
                 "internalType": "uint256",
                 "name": "_price",
                 "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_ticketCount",
+                "type": "uint256"
             }
         ],
         "name": "createEvent",
@@ -79,6 +84,11 @@ const abi = [
                 "internalType": "uint256",
                 "name": "price",
                 "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "ticketCount",
+                "type": "uint256"
             }
         ],
         "stateMutability": "view",
@@ -108,6 +118,11 @@ const abi = [
                     {
                         "internalType": "uint256",
                         "name": "price",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "ticketCount",
                         "type": "uint256"
                     }
                 ],

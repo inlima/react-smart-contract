@@ -42,6 +42,7 @@ function Home() {
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
   const [quantity, setQuantity] = useState("");
+  const [ticketCount, setTicketCount] = useState("");
   const [eventPosition, setEventPosition] = useState("");
   const [eventInfo, setEventInfo] = useState(null);
   const [eventPositionSearch, setEventPositionSearch] = useState("");
@@ -75,7 +76,7 @@ function Home() {
       setLoadingCreateEvent(true);
       const contas = await web3.eth.getAccounts();
       const response = await event.methods
-        .createEvent(name, description, date, parseInt(price))
+        .createEvent(name, description, date, parseInt(price), parseInt(ticketCount))
         .send({ from: contas[0] });
       console.log(response);
       setLoadingCreateEvent(false);
@@ -121,6 +122,7 @@ function Home() {
             <th>Descrição do Evento</th>
             <th>Data</th>
             <th>Valor do Ingresso (WEI)</th>
+            <th>Ingressos Disponíveis</th>
           </tr>
         </thead>
         <tbody>
@@ -132,6 +134,7 @@ function Home() {
               <td>{event.description}</td>
               <td>{converteHorario(parseInt(event.date))}</td>
               <td>{event.price}</td>
+              <td>{event.ticketCount}</td>
             </tr>
           ))}
         </tbody>
@@ -172,6 +175,13 @@ function Home() {
             placeholder="Digite o preço do ingresso"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
+          />
+          <br />
+          <br />
+          <input
+            placeholder="Digite a quantidade de ingressos"
+            value={ticketCount}
+            onChange={(e) => setTicketCount(e.target.value)}
           />
           <br />
           <br />
